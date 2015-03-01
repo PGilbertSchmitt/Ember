@@ -18,6 +18,7 @@ class Seat
         Seat();
         string getDataName();
         int getSeatNum();
+        static int getSeatCount();
 };
 
 #endif // SEAT_H

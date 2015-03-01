@@ -18,3 +18,8 @@ int Seat::getSeatNum()
 {
     return seatNum;
 }
+
+int Seat::getSeatCount()
+{
+    return seatNumSeed + 1;
+}

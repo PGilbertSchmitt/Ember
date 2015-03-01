@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
@@ -6,7 +6,7 @@
 		<Option makefile_is_custom="1" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="addons/;src/;build config/;" />
+		<Option virtualFolders="addons/;src/;build config/;addons/ofxXmlSettings/libs/;addons/ofxXmlSettings/src/;addons/ofxSimpleTimer/src/;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/$(PROJECT_NAME)_debug" prefix_auto="1" extension_auto="1" />
@@ -27,9 +27,36 @@
 				<Option projectLinkerOptionsRelation="2" />
 			</Target>
 		</Build>
+		<Unit filename="../../../addons/ofxSimpleTimer/src/ofxSimpleTimer.cpp">
+			<Option virtualFolder="addons/ofxSimpleTimer/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxSimpleTimer/src/ofxSimpleTimer.h">
+			<Option virtualFolder="addons/ofxSimpleTimer/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxXmlSettings/libs/tinyxml.cpp">
+			<Option virtualFolder="addons/ofxXmlSettings/libs" />
+		</Unit>
+		<Unit filename="../../../addons/ofxXmlSettings/libs/tinyxml.h">
+			<Option virtualFolder="addons/ofxXmlSettings/libs" />
+		</Unit>
+		<Unit filename="../../../addons/ofxXmlSettings/libs/tinyxmlerror.cpp">
+			<Option virtualFolder="addons/ofxXmlSettings/libs" />
+		</Unit>
+		<Unit filename="../../../addons/ofxXmlSettings/libs/tinyxmlparser.cpp">
+			<Option virtualFolder="addons/ofxXmlSettings/libs" />
+		</Unit>
+		<Unit filename="../../../addons/ofxXmlSettings/src/ofxXmlSettings.cpp">
+			<Option virtualFolder="addons/ofxXmlSettings/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxXmlSettings/src/ofxXmlSettings.h">
+			<Option virtualFolder="addons/ofxXmlSettings/src" />
+		</Unit>
 		<Unit filename="config.make">
 			<Option virtualFolder="build config" />
 		</Unit>
+		<Unit filename="src/DateTime.h" />
+		<Unit filename="src/Seat.cpp" />
+		<Unit filename="src/Seat.h" />
 		<Unit filename="src/main.cpp">
 			<Option virtualFolder="src/" />
 		</Unit>
@@ -44,29 +71,5 @@
 			<envvars />
 			<debugger />
 		</Extensions>
-		<Unit filename="../../../addons/ofxXmlSettings/src/ofxXmlSettings.cpp">
-			<Option virtualFolder="addons/ofxXmlSettings/src" />
-		</Unit>
-		<Unit filename="../../../addons/ofxXmlSettings/src/ofxXmlSettings.h">
-			<Option virtualFolder="addons/ofxXmlSettings/src" />
-		</Unit>
-		<Unit filename="../../../addons/ofxXmlSettings/libs/tinyxml.h">
-			<Option virtualFolder="addons/ofxXmlSettings/libs" />
-		</Unit>
-		<Unit filename="../../../addons/ofxXmlSettings/libs/tinyxml.cpp">
-			<Option virtualFolder="addons/ofxXmlSettings/libs" />
-		</Unit>
-		<Unit filename="../../../addons/ofxXmlSettings/libs/tinyxmlparser.cpp">
-			<Option virtualFolder="addons/ofxXmlSettings/libs" />
-		</Unit>
-		<Unit filename="../../../addons/ofxXmlSettings/libs/tinyxmlerror.cpp">
-			<Option virtualFolder="addons/ofxXmlSettings/libs" />
-		</Unit>
-		<Unit filename="../../../addons/ofxSimpleTimer/src/ofxSimpleTimer.cpp">
-			<Option virtualFolder="addons/ofxSimpleTimer/src" />
-		</Unit>
-		<Unit filename="../../../addons/ofxSimpleTimer/src/ofxSimpleTimer.h">
-			<Option virtualFolder="addons/ofxSimpleTimer/src" />
-		</Unit>
 	</Project>
 </CodeBlocks_project_file>
