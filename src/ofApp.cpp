@@ -12,11 +12,12 @@ void ofApp::setup(){
     cout << "The file for seat " << first.getSeatNum() << " is called " << first.getDataName() << endl;
     cout << "The file for seat " << second.getSeatNum() << " is called " << second.getDataName() << endl;
     cout << "The file for seat " << third.getSeatNum() << " is called " << third.getDataName() << endl;
+    /* The seat numbering starts at 0, while the data numbering starts at 1. This is okay, because we'll */
+    /* only be looking at either within the class itself                                                 */
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-
 }
 
 //--------------------------------------------------------------
@@ -26,12 +27,20 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+    if (key == 's')
+    {
+        cout << "Goodbye" << endl;
+        std::exit(1);
+    }
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
-
+    if (key == 's')
+    {
+        cout << "Goodbye" << endl;
+        std::exit(1);
+    }
 }
 
 //--------------------------------------------------------------
