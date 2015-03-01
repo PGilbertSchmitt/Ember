@@ -20,6 +20,8 @@ void ofApp::setup(){
     cout << "The file for seat " << fifth.getSeatNum() << " is called " << fifth.getDataName() << endl;
     /* The seat numbering starts at 0, while the data numbering starts at 1. This is okay, because we'll */
     /* only be looking at either within the class itself                                                 */
+
+    cout << "Hit \"s\" to terminate" << endl;
 }
 
 //--------------------------------------------------------------

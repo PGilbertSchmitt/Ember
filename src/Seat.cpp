@@ -9,6 +9,14 @@ Seat::Seat()
     dataFileName = ss.str();
 }
 
+Seat::Seat(int i)
+{
+    seatNum = i;
+    seatNumSeed++;
+    ss << "data" << (seatNum + 1) << ".xml";
+    dataFileName = ss.str();
+}
+
 string Seat::getDataName()
 {
     return dataFileName;

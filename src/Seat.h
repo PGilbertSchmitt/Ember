@@ -16,6 +16,7 @@ class Seat
     public:
 
         Seat();
+        Seat(int i);
         string getDataName();
         int getSeatNum();
         static int getSeatCount();
