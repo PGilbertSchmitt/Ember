@@ -51,6 +51,11 @@
 		<Unit filename="../../../addons/ofxXmlSettings/src/ofxXmlSettings.h">
 			<Option virtualFolder="addons/ofxXmlSettings/src" />
 		</Unit>
+		<Unit filename="bin/data/data1.xml" />
+		<Unit filename="bin/data/data2.xml" />
+		<Unit filename="bin/data/data3.xml" />
+		<Unit filename="bin/data/data4.xml" />
+		<Unit filename="bin/data/data5.xml" />
 		<Unit filename="config.make">
 			<Option virtualFolder="build config" />
 		</Unit>

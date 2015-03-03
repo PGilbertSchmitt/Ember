@@ -7,7 +7,7 @@ Seat::Seat()
     seatNum = ++seatNumSeed;
     ss << "data" << (seatNum) << ".xml";
     dataFileName = ss.str();
-    numNotes = 0;
+    numNotesInit = 0;
     setNoteVector();
 }
 
@@ -43,7 +43,7 @@ void Seat::setNoteVector()
             {
                 int noteVal = savedNotes.getValue("note:value",0,i);
                 noteList.push_back(noteVal);
-                numNotes++;
+                numNotesInit++;
             }
         }
 	}
@@ -54,4 +54,17 @@ void Seat::setNoteVector()
 int Seat::getNoteListSize()
 {
     return noteList.size();
+}
+
+void Seat::saveNoteList()
+{
+    savedNotes.pushTag("history");
+
+    for (int i = numNotesInit; i < getNoteListSize(); i++)
+    {
+        savedNotes.setValue("note:value",noteList[i],i);
+    }
+
+    savedNotes.popTag();
+    savedNotes.save(dataFileName);
 }

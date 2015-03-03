@@ -23,12 +23,16 @@ class Seat
         int getSeatNum();
         static int getSeatCount();
 
-        //The following methods and members are used for loading and storing note data from the xml files
+        /**The following members are used for loading and storing note data from the XML files*/
         ofxXmlSettings savedNotes;      //XML file to parse for note values
         vector<int> noteList;           //List of notes that will be used by the program
-        int numNotes;                   //Number of notes available in this seat's history
+        int numNotesInit;               //Number of notes available in this seat's history when the XML file is first loaded
 
         int getNoteListSize();
+        void saveNoteList();
+
+        /** The following methods handle messages from the Arduino running the StandardFirmata sketch **/
+
 };
 
 #endif // SEAT_H
