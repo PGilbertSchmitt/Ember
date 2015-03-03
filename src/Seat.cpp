@@ -4,20 +4,14 @@ int Seat::seatNumSeed = 0;
 
 Seat::Seat()
 {
-    seatNum = seatNumSeed++;
-    ss << "data" << (seatNum + 1) << ".xml";
+    seatNum = ++seatNumSeed;
+    ss << "data" << (seatNum) << ".xml";
     dataFileName = ss.str();
+    numNotes = 0;
+    setNoteVector();
 }
 
-Seat::Seat(int i)
-{
-    seatNum = i;
-    seatNumSeed++;
-    ss << "data" << (seatNum + 1) << ".xml";
-    dataFileName = ss.str();
-}
-
-string Seat::getDataName()
+string Seat::getDataFileName()
 {
     return dataFileName;
 }
@@ -30,4 +24,34 @@ int Seat::getSeatNum()
 int Seat::getSeatCount()
 {
     return seatNumSeed + 1;
+}
+
+void Seat::setNoteVector()
+{
+    savedNotes.load(dataFileName);
+
+    int numHistoryTags = savedNotes.getNumTags("history:note");
+
+	if (numHistoryTags > 0)
+	{
+        savedNotes.pushTag("history");
+
+        int numNoteTags = savedNotes.getNumTags("note");
+        if (numNoteTags > 0)
+        {
+            for (int i = 0; i < numNoteTags; i++)
+            {
+                int noteVal = savedNotes.getValue("note:value",0,i);
+                noteList.push_back(noteVal);
+                numNotes++;
+            }
+        }
+	}
+
+	savedNotes.popTag();
+}
+
+int Seat::getNoteListSize()
+{
+    return noteList.size();
 }

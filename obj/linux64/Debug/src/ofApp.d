@@ -309,7 +309,9 @@ obj/linux64/Debug/src/ofApp.o: src/ofApp.cpp src/ofApp.h \
  ../../../libs/openFrameworks/video/ofVideoPlayer.h \
  ../../../libs/openFrameworks/video/ofGstVideoPlayer.h \
  ../../../libs/openFrameworks/3d/ofCamera.h \
- ../../../libs/openFrameworks/3d/ofEasyCam.h src/Seat.h src/DateTime.h
+ ../../../libs/openFrameworks/3d/ofEasyCam.h src/Seat.h \
+ ../../../addons/ofxXmlSettings/src/ofxXmlSettings.h \
+ ../../../addons/ofxXmlSettings/libs/tinyxml.h
 
 src/ofApp.h:
 
@@ -969,4 +971,6 @@ src/ofApp.h:
 
 src/Seat.h:
 
-src/DateTime.h:
+../../../addons/ofxXmlSettings/src/ofxXmlSettings.h:
+
+../../../addons/ofxXmlSettings/libs/tinyxml.h:

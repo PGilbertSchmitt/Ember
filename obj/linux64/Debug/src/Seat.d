@@ -309,7 +309,9 @@ obj/linux64/Debug/src/Seat.o: src/Seat.cpp src/Seat.h \
  ../../../libs/openFrameworks/video/ofVideoPlayer.h \
  ../../../libs/openFrameworks/video/ofGstVideoPlayer.h \
  ../../../libs/openFrameworks/3d/ofCamera.h \
- ../../../libs/openFrameworks/3d/ofEasyCam.h src/DateTime.h
+ ../../../libs/openFrameworks/3d/ofEasyCam.h \
+ ../../../addons/ofxXmlSettings/src/ofxXmlSettings.h \
+ ../../../addons/ofxXmlSettings/libs/tinyxml.h
 
 src/Seat.h:
 
@@ -967,4 +969,6 @@ src/Seat.h:
 
 ../../../libs/openFrameworks/3d/ofEasyCam.h:
 
-src/DateTime.h:
+../../../addons/ofxXmlSettings/src/ofxXmlSettings.h:
+
+../../../addons/ofxXmlSettings/libs/tinyxml.h:

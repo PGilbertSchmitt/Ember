@@ -1,25 +1,22 @@
 #include "ofApp.h"
+#define NUM_OF_SEATS 5
 
 using namespace std;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
 
-    /*Initializing the five seat objects*/
-    Seat first;
-    Seat second;
-    Seat third;
-    Seat fourth;
-    Seat fifth;
+    /*Initializing the five seat objects into an array called allSeats*/
+    Seat allSeats[NUM_OF_SEATS];
 
     /*This is a test to show that each seat has its own filename for its respective xml file*/
-    cout << "The file for seat " << first.getSeatNum() << " is called " << first.getDataName() << endl;
-    cout << "The file for seat " << second.getSeatNum() << " is called " << second.getDataName() << endl;
-    cout << "The file for seat " << third.getSeatNum() << " is called " << third.getDataName() << endl;
-    cout << "The file for seat " << fourth.getSeatNum() << " is called " << fourth.getDataName() << endl;
-    cout << "The file for seat " << fifth.getSeatNum() << " is called " << fifth.getDataName() << endl;
+
+    for (int i = 0; i < NUM_OF_SEATS; i++)
+    {
+        cout << "Seat " << i << " has " << allSeats[i].getNoteListSize() << " saved notes." << endl;
+    }
     /* The seat numbering starts at 0, while the data numbering starts at 1. This is okay, because we'll */
-    /* only be looking at either within the class itself                                                 */
+    /* only be looking at either within the class itself*/
 
     cout << "Hit \"s\" to terminate" << endl;
 }
