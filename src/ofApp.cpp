@@ -40,14 +40,12 @@ void ofApp::keyPressed(int key){
 
     if (key == '1')
     {
-        allSeats[1].noteList.push_back(1);
-        cout << "Added note 1 to array 1" << endl;
+        cout << "PinNum 2 is " << ard.getDigital(2) << endl;
     }
 
     if (key == '2')
     {
-        allSeats[1].noteList.push_back(2);
-        cout << "Added note 2 to array 1" << endl;
+        cout << "PinNum 3 is " << ard.getDigital(3) << endl;
     }
 }
 
@@ -61,7 +59,7 @@ void ofApp::setupArduino(const int & version)
     cout << ard.getFirmwareName();
     cout << "firmata v" << ard.getMajorFirmwareVersion() << "." << ard.getMinorFirmwareVersion();
 
-    for (int i = 0; i < NUM_OF_SEATS; i++)
+    for (int i = 0; i < 10; i++)
     {
         ard.sendDigitalPinMode((i+2),ARD_INPUT);
     }
