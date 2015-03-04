@@ -9,19 +9,27 @@ class Seat
 {
     private:
 
-        int seatNum;
-        static int seatNumSeed;
+        int nSeatNum;
+        static int nSeatNumSeed;
         std::stringstream ss;
         std::string dataFileName;
 
         void setNoteVector();
+        int nPinNum;                     //Holds the pin number on the Arduino, which starts from 2
+        bool bPressState;                //Holds whether or not the seat was being pressed beforehand
+        int note;
+
+        /** These variables will be used to retrieve the duration of a button press **/
+        unsigned long long nDur;
+        unsigned long long nStart;
 
     public:
 
         Seat();
-        string getDataFileName();
-        int getSeatNum();
-        static int getSeatCount();
+        string getDataFileName();       //Returns the name of the XML file where note history should be stored
+        int getSeatNum();               //Returns the number of the seat (or seat ID) unique to each seat
+        int getPinNum();                //Returns the pin number that this seat accesses from the Arduino
+        static int getSeatCount();      //Returns the number of seats currently initiated
 
         /**The following members are used for loading and storing note data from the XML files*/
         ofxXmlSettings savedNotes;      //XML file to parse for note values
@@ -33,6 +41,13 @@ class Seat
 
         /** The following methods handle messages from the Arduino running the StandardFirmata sketch **/
 
+        /** The following methods handle playback of notes from the noteList vector **/
+        void playBack();
+        void setPressState(bool & state);
+        bool getPressState();
+
+        void setStartTime();
+        void setDuration();
 };
 
 #endif // SEAT_H

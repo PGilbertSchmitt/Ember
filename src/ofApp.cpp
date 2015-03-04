@@ -5,7 +5,7 @@ using namespace std;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-
+    const string port = "/dev/ttyACM0";  //Stores the port name for the Arduino
     if (ard.connect(port, 57600))
     {
         if (ard.isArduinoReady())
@@ -13,9 +13,10 @@ void ofApp::setup(){
             cout << "Successful connection established." << endl;
         }
     }
-
     ofAddListener(ard.EInitialized, this, &ofApp::setupArduino);
-	bSetupArduino	= false;
+    bSetupArduino	= false;
+
+    nSeatLoop = 0;      //The update function will perform actions with each seat via allSeats[nSeatLoop]
 
     cout << "Hit \"s\" to terminate" << endl;
 }
@@ -23,9 +24,23 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     ard.update();
-    if (ard.isInitialized())
+    /*if (ard.isInitialized())
     {
         cout << buttonState << endl;
+    }*/
+
+    if (allSeats[nSeatLoop].getPressState())
+    {
+        //allSeats[nSeatLoop].playBack();
+    }
+
+    if (nSeatLoop < 4)
+    {
+        nSeatLoop++;
+    }
+    else
+    {
+        nSeatLoop=0;
     }
 }
 
@@ -73,6 +88,17 @@ void ofApp::setupArduino(const int & version)
 void ofApp::digitalPinChanged(const int & pinNum)
 {
     buttonState = "digital pin: " + ofToString(pinNum) + " = " + ofToString(ard.getDigital(pinNum));
+    int pinToSeat = pinNum - 2;
+    bool state = ard.getDigital(pinNum);
+    allSeats[pinToSeat].setPressState(state);
+    if (state)
+    {
+        allSeats[pinToSeat].setStartTime();
+    }
+    else
+    {
+        allSeats[pinToSeat].setDuration();
+    }
 }
 
 //--------------------------------------------------------------

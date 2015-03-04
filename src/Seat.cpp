@@ -1,29 +1,15 @@
 #include "Seat.h"
 
-int Seat::seatNumSeed = 0;
+int Seat::nSeatNumSeed = 0;
 
 Seat::Seat()
 {
-    seatNum = ++seatNumSeed;
-    ss << "data" << (seatNum) << ".xml";
+    nSeatNum = ++nSeatNumSeed;
+    nPinNum = nSeatNum+1;
+    ss << "data" << (nSeatNum) << ".xml";
     dataFileName = ss.str();
     numNotesInit = 0;
     setNoteVector();
-}
-
-string Seat::getDataFileName()
-{
-    return dataFileName;
-}
-
-int Seat::getSeatNum()
-{
-    return seatNum;
-}
-
-int Seat::getSeatCount()
-{
-    return seatNumSeed + 1;
 }
 
 void Seat::setNoteVector()
@@ -51,9 +37,61 @@ void Seat::setNoteVector()
 	savedNotes.popTag();
 }
 
+//----------------------SETTERS----------------------------------
+
+void Seat::setPressState(bool & state)
+{
+    bPressState = state;
+}
+
+void Seat::setStartTime()
+{
+    nStart = ofGetSystemTime();
+}
+
+void Seat::setDuration()
+{
+    nDur = ofGetSystemTime() - nStart;
+    std::cout << "Dur:   " << nDur << endl;
+}
+
+//----------------------GETTERS----------------------------------
+
+string Seat::getDataFileName()
+{
+    return dataFileName;
+}
+
+int Seat::getSeatNum()
+{
+    return nSeatNum;
+}
+
+int Seat::getSeatCount()
+{
+    return nSeatNumSeed + 1;
+}
+
 int Seat::getNoteListSize()
 {
     return noteList.size();
+}
+
+int Seat::getPinNum()
+{
+    return nPinNum;
+}
+
+bool Seat::getPressState()
+{
+    return bPressState;
+}
+
+//----------------------OTHERS-----------------------------------
+
+void Seat::playBack()
+{
+    std::cout << getPinNum() << endl;
 }
 
 void Seat::saveNoteList()

@@ -25,16 +25,20 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 
 
-        /* Initializing the five seat objects into an array called allSeats */
+        /* Initializing the five seat objects into an array called allSeats.
+         * The seats will need to be accessed one at a time in numerical order,
+         * so they will be iterated through using for loops. Accessing the seats'
+         * members is done through allSeats[i].member
+         */
         Seat allSeats[NUM_OF_SEATS];
 
-        ofArduino ard;
+        ofArduino ard;      //Allows for serial communication with the Arduino
         string buttonState;
         string potValue;
-        bool bSetupArduino;
+        bool bSetupArduino; //Used to only perform certain actions once the Arduino has been setup
+        int nSeatLoop;      //Used to iterate between the seats during the update function
 
     private:
-        const string port = "/dev/ttyACM0";
         void setupArduino(const int & version);
         void digitalPinChanged(const int & pinNum);
         void analogPinChanged(const int & pinNum);
