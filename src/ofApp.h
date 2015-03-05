@@ -33,6 +33,8 @@ class ofApp : public ofBaseApp{
         Seat allSeats[NUM_OF_SEATS];
 
         ofArduino ard;      //Allows for serial communication with the Arduino
+        ofSoundPlayer ring; //Used for playback of the notes
+
         string buttonState;
         string potValue;
         bool bSetupArduino; //Used to only perform certain actions once the Arduino has been setup
@@ -42,4 +44,6 @@ class ofApp : public ofBaseApp{
         void setupArduino(const int & version);
         void digitalPinChanged(const int & pinNum);
         void analogPinChanged(const int & pinNum);
+
+        int seatsOccupied;  //Holds the current number of seats occupied for the playback time
 };

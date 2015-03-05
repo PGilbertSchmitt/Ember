@@ -11,17 +11,20 @@ class Seat
 
         int nSeatNum;
         static int nSeatNumSeed;
+        static unsigned long long nLastTime;   //Holds the last time a note was played
         std::stringstream ss;
         std::string dataFileName;
 
         void setNoteVector();
         int nPinNum;                     //Holds the pin number on the Arduino, which starts from 2
         bool bPressState;                //Holds whether or not the seat was being pressed beforehand
-        int note;
 
         /** These variables will be used to retrieve the duration of a button press **/
         unsigned long long nDur;
         unsigned long long nStart;
+
+        /** These variables will be used by the playback function **/
+        int nNote;                      //Holds the current note that needs to be played next
 
     public:
 
@@ -40,7 +43,7 @@ class Seat
         void saveNoteList();
 
         /** The following methods handle notes to and from the noteList vector **/
-        void playBack();
+        void playBack(const int seatsOccupied, ofSoundPlayer & ring);
         void setPressState(bool & state);
         bool getPressState();
 
@@ -48,7 +51,9 @@ class Seat
         void setDuration();
         int getCurrentDur();
 
-        void addNote(int value);
+        void addNote(int value);        //Adds a new note to the noteList array
+        void setNote(bool state);        //If the seat is occupied, the note switches to the next one by decrementing
+                                        //If note, the note is reset to the end of the noteList vector
 };
 
 #endif // SEAT_H

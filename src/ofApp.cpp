@@ -19,6 +19,8 @@ void ofApp::setup(){
 
     nSeatLoop = 0;      //The update function will perform actions with each seat via allSeats[nSeatLoop]
 
+    ring.loadSound("zenbell.mp3");
+
     cout << "Hit \"s\" to terminate" << endl;
 }
 
@@ -30,9 +32,24 @@ void ofApp::update(){
         cout << buttonState;
     }*/
 
+    seatsOccupied = 0;
+
+    for (int i = 0; i < NUM_OF_SEATS; i++)
+    {
+        if (allSeats[i].getPressState())
+        {
+            seatsOccupied++;
+        }
+    }
+
+    if (!seatsOccupied)
+    {
+        ring.stop();
+    }
+
     if (allSeats[nSeatLoop].getPressState())
     {
-        //allSeats[nSeatLoop].playBack();
+        allSeats[nSeatLoop].playBack(seatsOccupied, ring);
     }
 
     if (nSeatLoop < (NUM_OF_SEATS-1))
@@ -107,7 +124,7 @@ void ofApp::digitalPinChanged(const int & pinNum)
             allSeats[pinToSeat].setDuration();
             int duration = allSeats[pinToSeat].getCurrentDur();
             int value = duration / 1000;
-            cout << value << endl;
+            cout << "Value: " << value << " for pin " << pinNum << endl;
             if (value < 7)
             {
                 allSeats[pinToSeat].addNote(value);
@@ -115,6 +132,7 @@ void ofApp::digitalPinChanged(const int & pinNum)
             {
                 allSeats[pinToSeat].addNote(7);
             }
+            allSeats[pinToSeat].setNote(false);
         }
     }
 }
