@@ -39,15 +39,16 @@ class Seat
         int getNoteListSize();
         void saveNoteList();
 
-        /** The following methods handle messages from the Arduino running the StandardFirmata sketch **/
-
-        /** The following methods handle playback of notes from the noteList vector **/
+        /** The following methods handle notes to and from the noteList vector **/
         void playBack();
         void setPressState(bool & state);
         bool getPressState();
 
         void setStartTime();
         void setDuration();
+        int getCurrentDur();
+
+        void addNote(int value);
 };
 
 #endif // SEAT_H

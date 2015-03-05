@@ -5,7 +5,7 @@
 #include "Seat.h"
 #include <iostream>
 
-#define NUM_OF_SEATS 5
+#define NUM_OF_SEATS 3
 
 class ofApp : public ofBaseApp{
 

@@ -10,6 +10,9 @@ Seat::Seat()
     dataFileName = ss.str();
     numNotesInit = 0;
     setNoteVector();
+
+    setStartTime();
+    setDuration();
 }
 
 void Seat::setNoteVector()
@@ -52,7 +55,11 @@ void Seat::setStartTime()
 void Seat::setDuration()
 {
     nDur = ofGetSystemTime() - nStart;
-    std::cout << "Dur:   " << nDur << endl;
+}
+
+void Seat::addNote(int value)
+{
+    noteList.push_back(value);
 }
 
 //----------------------GETTERS----------------------------------
@@ -85,6 +92,11 @@ int Seat::getPinNum()
 bool Seat::getPressState()
 {
     return bPressState;
+}
+
+int Seat::getCurrentDur()
+{
+    return nDur;
 }
 
 //----------------------OTHERS-----------------------------------
