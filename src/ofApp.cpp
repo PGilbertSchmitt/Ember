@@ -1,5 +1,6 @@
 #include "ofApp.h"
 #define NUM_OF_SEATS 3
+#define SENSITIVITY 800
 
 using namespace std;
 
@@ -112,33 +113,7 @@ void ofApp::setupArduino(const int & version)
 
 void ofApp::digitalPinChanged(const int & pinNum)
 {
-    /*if (bSetupArduino)
-    {
-        buttonState = "digital pin: " + ofToString(pinNum) + " = " + ofToString(ard.getDigital(pinNum));
-        cout << buttonState << endl;
-        int pinToSeat = pinNum - 2;
-        bool state = ard.getDigital(pinNum);
-        allSeats[pinToSeat].setPressState(state);
-        if (state)
-        {
-            allSeats[pinToSeat].setStartTime();
-        }
-        else
-        {
-            allSeats[pinToSeat].setDuration();
-            int duration = allSeats[pinToSeat].getCurrentDur();
-            int value = duration / 1000;
-            cout << "Value: " << value << " for pin " << pinNum << endl;
-            if (value < 7)
-            {
-                allSeats[pinToSeat].addNote(value);
-            } else
-            {
-                allSeats[pinToSeat].addNote(7);
-            }
-            allSeats[pinToSeat].setNote(false);
-        }
-    }*/
+
 }
 
 //--------------------------------------------------------------
@@ -150,7 +125,7 @@ void ofApp::analogPinChanged(const int & pinNum)
         //potValue = "analog pin: " + ofToString(pinNum) + " = " + ofToString(ard.getAnalog(pinNum));
 
         bool state;
-        if (ard.getAnalog(pinNum) > 900 && allSeats[pinNum].getLastState() == false)
+        if (ard.getAnalog(pinNum) > SENSITIVITY && allSeats[pinNum].getLastState() == false)
         {
             allSeats[pinNum].setStartTime();
             state = true;
@@ -158,7 +133,7 @@ void ofApp::analogPinChanged(const int & pinNum)
 
             cout << "Seat " << pinNum << " was pressed" << endl;
         }
-        else if (ard.getAnalog(pinNum) <=900 && allSeats[pinNum].getLastState() == true)
+        else if (ard.getAnalog(pinNum) <= SENSITIVITY && allSeats[pinNum].getLastState() == true)
         {
             allSeats[pinNum].setDuration();
             int duration = allSeats[pinNum].getCurrentDur();
