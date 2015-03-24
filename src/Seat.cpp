@@ -15,6 +15,7 @@ Seat::Seat()
     setStartTime();
     setDuration();
     setNote(false);
+    setLastState(false);
 }
 
 void Seat::setNoteVector()
@@ -49,6 +50,10 @@ void Seat::setPressState(bool & state)
     bPressState = state;
 }
 
+void Seat::setLastState(bool state)
+{
+    bLastState = state;
+}
 void Seat::setStartTime()
 {
     nStart = ofGetSystemTime();
@@ -113,6 +118,11 @@ int Seat::getPinNum()
 bool Seat::getPressState()
 {
     return bPressState;
+}
+
+bool Seat::getLastState()
+{
+    return bLastState;
 }
 
 int Seat::getCurrentDur()

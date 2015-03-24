@@ -19,9 +19,10 @@ void ofApp::setup(){
 
     nSeatLoop = 0;      //The update function will perform actions with each seat via allSeats[nSeatLoop]
 
-    ring.loadSound("zenbell.mp3");
+    ring.loadSound("zenbell.wav");
+    ring.play();
 
-    cout << "Hit \"s\" to terminate" << endl;
+    cout << "Hit \"s\" to terminate Ember" << endl;
 }
 
 //--------------------------------------------------------------
@@ -36,7 +37,7 @@ void ofApp::update(){
 
     for (int i = 0; i < NUM_OF_SEATS; i++)
     {
-        if (allSeats[i].getPressState())
+        if (allSeats[i].getLastState())
         {
             seatsOccupied++;
         }
@@ -47,7 +48,7 @@ void ofApp::update(){
         ring.stop();
     }
 
-    if (allSeats[nSeatLoop].getPressState())
+    if (allSeats[nSeatLoop].getLastState())
     {
         allSeats[nSeatLoop].playBack(seatsOccupied, ring);
     }
@@ -92,12 +93,14 @@ void ofApp::setupArduino(const int & version)
     ofRemoveListener(ard.EInitialized, this, &ofApp::setupArduino);
 
     cout << ard.getFirmwareName();
-    cout << "firmata v" << ard.getMajorFirmwareVersion() << "." << ard.getMinorFirmwareVersion();
+    cout << "firmata v" << ard.getMajorFirmwareVersion() << "." << ard.getMinorFirmwareVersion() << endl;
 
-    for (int i = 0; i < NUM_OF_SEATS; i++)
+    /*for (int i = 0; i < NUM_OF_SEATS; i++)
     {
         ard.sendDigitalPinMode((i+2),ARD_INPUT);
-    }
+    }*/
+
+    ard.sendAnalogPinReporting(0,ARD_ANALOG);
 
     ofAddListener(ard.EDigitalPinChanged, this, &ofApp::digitalPinChanged);
     ofAddListener(ard.EAnalogPinChanged, this, &ofApp::analogPinChanged);
@@ -109,9 +112,10 @@ void ofApp::setupArduino(const int & version)
 
 void ofApp::digitalPinChanged(const int & pinNum)
 {
-    if (bSetupArduino)
+    /*if (bSetupArduino)
     {
         buttonState = "digital pin: " + ofToString(pinNum) + " = " + ofToString(ard.getDigital(pinNum));
+        cout << buttonState << endl;
         int pinToSeat = pinNum - 2;
         bool state = ard.getDigital(pinNum);
         allSeats[pinToSeat].setPressState(state);
@@ -134,14 +138,45 @@ void ofApp::digitalPinChanged(const int & pinNum)
             }
             allSeats[pinToSeat].setNote(false);
         }
-    }
+    }*/
 }
 
 //--------------------------------------------------------------
 
 void ofApp::analogPinChanged(const int & pinNum)
 {
-    potValue = "analog pin: " + ofToString(pinNum) + " = " + ofToString(ard.getAnalog(pinNum));
+    if (bSetupArduino)
+    {
+        //potValue = "analog pin: " + ofToString(pinNum) + " = " + ofToString(ard.getAnalog(pinNum));
+
+        bool state;
+        if (ard.getAnalog(pinNum) > 900 && allSeats[pinNum].getLastState() == false)
+        {
+            allSeats[pinNum].setStartTime();
+            state = true;
+            allSeats[pinNum].setLastState(state);
+
+            cout << "Seat " << pinNum << " was pressed" << endl;
+        }
+        else if (ard.getAnalog(pinNum) <=900 && allSeats[pinNum].getLastState() == true)
+        {
+            allSeats[pinNum].setDuration();
+            int duration = allSeats[pinNum].getCurrentDur();
+            int value = duration / 1000;
+            if (value < 7)
+            {
+                allSeats[pinNum].addNote(value);
+            } else
+            {
+                allSeats[pinNum].addNote(7);
+            }
+            allSeats[pinNum].setNote(false);
+            state = false;
+            allSeats[pinNum].setLastState(state);
+
+            cout << "Seat " << pinNum << " was released" << endl;
+        }
+    }
 }
 
 //--------------------------------------------------------------

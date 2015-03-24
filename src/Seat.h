@@ -18,6 +18,7 @@ class Seat
         void setNoteVector();
         int nPinNum;                     //Holds the pin number on the Arduino, which starts from 2
         bool bPressState;                //Holds whether or not the seat was being pressed beforehand
+        bool bLastState;
 
         /** These variables will be used to retrieve the duration of a button press **/
         unsigned long long nDur;
@@ -46,6 +47,8 @@ class Seat
         void playBack(const int seatsOccupied, ofSoundPlayer & ring);
         void setPressState(bool & state);
         bool getPressState();
+        void setLastState(bool state);
+        bool getLastState();
 
         void setStartTime();
         void setDuration();
